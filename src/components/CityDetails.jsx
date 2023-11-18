@@ -109,7 +109,7 @@ useEffect(() => {
       <div className="mt-4 flex space-x-4">
         <button
           onClick={() => handleAddFavorite(cityDetails.location.name)}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+          className="bg-blue-500 w-full text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
         >
           Add to Favorites
         </button>

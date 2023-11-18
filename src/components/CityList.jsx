@@ -17,7 +17,6 @@ const CityList = ({ cities, onCityClick, onRemoveCity }) => {
             >
               {city.name}
             </span>
-            <span>{`Temperature: ${city.temperature}`}</span>
             <div className="space-x-2">
               <button
                 onClick={() => onRemoveCity(city.id)}
@@ -29,6 +28,7 @@ const CityList = ({ cities, onCityClick, onRemoveCity }) => {
           </li>
         ))}
       </ul>
+      {cities.length===0 && <p className='text-center flex justify-center items-center'>No cities found</p>}
     </div>
   );
 };

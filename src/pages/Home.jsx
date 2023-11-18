@@ -5,22 +5,28 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from '../components/SearchBar';
 import FavoriteList from '../components/FavoritiesList';
 
-const API_KEY = "7d4034c6cb7edd0c6b8d6d7c337c4994"; // Replace with your actual API key
+// const API_KEY = "7d4034c6cb7edd0c6b8d6d7c337c4994"; // Replace with your actual API key
 const API__KEY = "0d63c234f45849cab44b1efb54c1afd2"; // Replace with your actual API key
 
-const DEFAULT_CITIES = [
-  { id: 1, name: "New York", temperature: "20°C" },
-  { id: 2, name: "London", temperature: "15°C" },
-  // Add more default cities as needed
-];
 
 const Home = () => {
   const [cities, setCities] = useState([
-
+    { id: 1, name: "New York" },
+    { id: 2, name: "London" },
+    { id: 3, name: "Nigeria" },
+    { id: 4, name: "Germany" },
+    { id: 5, name: "Canada" },
+    { id: 6, name: "Boston" },
+    { id: 7, name: "London" },
+    { id: 8, name: "Paris" },
+    { id: 9, name: "Spain" },
+    { id: 10, name: "Japan" },
+    { id: 11, name: "Tokyo " },
+    { id: 12, name: "Singapore  " },
+    { id: 13, name: "Dubai  " },
   ]);
   const [favorites, setFavorites] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
-  const [country, setCountry] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -31,11 +37,6 @@ const Home = () => {
     // Fetch data for the 15 largest cities
     const fetchCities = async () => {
       try {
-        const response = await axios.get(
-          `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${country}`
-        );
-        setCities(response.data);
-
         if (userLocation) {
           // Use reverse geocoding to get city name based on latitude and longitude
           const reverseGeocodingResponse = await axios.get(
@@ -44,8 +45,6 @@ const Home = () => {
 
           const country =
             reverseGeocodingResponse.data.results[0].components.country;
-          setCountry(country);
-
           navigate(`/details/${country}`);
         }
       } catch (error) {
@@ -54,7 +53,7 @@ const Home = () => {
     };
 
     fetchCities();
-  }, [userLocation]);
+  }, [userLocation, navigate]);
 
   const handleCityClick = (cityId) => {
     // Navigate to city details page
@@ -90,7 +89,7 @@ const Home = () => {
   }, []);
 
   // Filter cities based on search term
-  const filteredCities = DEFAULT_CITIES.filter((city) =>
+  const filteredCities = cities.filter((city) =>
     city.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -111,7 +110,7 @@ const handleRemoveFavorite = (cityId) => {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      <div className="flex w-full container space-x-6 mx-auto ">
+      <div className="md:flex w-full px-6 container space-x-6 mx-auto ">
         <CityList
           cities={filteredCities}
           onCityClick={handleCityClick}
