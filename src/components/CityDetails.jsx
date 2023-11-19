@@ -26,7 +26,7 @@ const CityDetails = () => {
       try {
         // Simulate fetching data
         const response = await fetch(
-          `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${"New york"}`
+          `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${id}`
         );
         const data = await response.json();
         setCityDetails(data);
