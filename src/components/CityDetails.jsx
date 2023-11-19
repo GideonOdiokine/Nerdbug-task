@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const API_KEY = "7d4034c6cb7edd0c6b8d6d7c337c4994"; // Replace with your actual API key
+const API_KEY = "a228619ed0256db40e9393366f42aa47";
+
 
 const CityDetails = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const CityDetails = () => {
       try {
         // Simulate fetching data
         const response = await fetch(
-          `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${id}`
+          `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${"New york"}`
         );
         const data = await response.json();
         setCityDetails(data);
@@ -90,25 +91,27 @@ useEffect(() => {
     return <p>Loading...</p>; // You might want to add a loading indicator
   }
 
+  console.log(cityDetails)
+
   return (
     <div className="max-w-lg mx-auto mt-8 bg-black text-white px-10 py-6">
       <button onClick={() => navigate("/")}>Back to home</button>
       <h2 className="text-2xl font-bold mb-4 flex space-x-2">
-        {cityDetails.location.name}
+        {cityDetails?.location?.name}
       </h2>
       <img
-        src={cityDetails.current.weather_icons}
+        src={cityDetails?.current?.weather_icons}
         alt="icon"
         className="w-6 h-6"
         width={200}
         height={200}
       />
-      <p>Temperature: {cityDetails.current.temperature}</p>
-      <p>Description: {cityDetails.current.weather_descriptions}</p>
+      <p>Temperature: {cityDetails?.current?.temperature}</p>
+      <p>Description: {cityDetails?.current?.weather_descriptions}</p>
 
       <div className="mt-4 flex space-x-4">
         <button
-          onClick={() => handleAddFavorite(cityDetails.location.name)}
+          onClick={() => handleAddFavorite(cityDetails?.location?.name)}
           className="bg-blue-500 w-full text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
         >
           Add to Favorites
