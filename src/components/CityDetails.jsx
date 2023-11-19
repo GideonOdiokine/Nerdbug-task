@@ -20,8 +20,6 @@ const CityDetails = () => {
 
 
   useEffect(() => {
-
-
     const fetchData = async () => {
       try {
         // Simulate fetching data
